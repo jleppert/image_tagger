@@ -1,7 +1,7 @@
 Setup Instructions
 ----
 
-Clone the repo, make sure you have node, then just run npm install in the checked out directory. After that's done, run node index.js to start the web server and open your browser to http://localhost:9000 to see the UI.
+Clone the repo, make sure you have node.js(https://nodejs.org/en/), then just run npm install in the checked out directory. After that's done, run node index.js to start the web server and open your browser to http://localhost:9000 to see the UI.
 
 Put image files (browser compatible) under /images
 JSON data is under /tags
