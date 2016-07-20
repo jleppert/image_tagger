@@ -1,0 +1,23 @@
+{
+  "name": "tagger",
+  "version": "1.0.0",
+  "description": "Simple image tagger",
+  "port": 9000,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "browserify": "^13.0.1",
+    "browserify-middleware": "^7.0.0",
+    "express": "^4.14.0",
+    "express-serve-json-dir": "0.0.1",
+    "jquery": "^3.1.0",
+    "livereload": "^0.5.0",
+    "livereload-js": "^2.2.2",
+    "query-string": "^4.2.2"
+  }
+}

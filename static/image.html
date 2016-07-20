@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .status {
+        position: fixed;
+        height: 20px;
+        width: 200px;
+        opacity: 0.8;
+        padding: 10px;
+        text-align: right;
+        background: white;
+        right: 0px;
+        color: green;
+        display: none;
+      }
+      #saved { color: green; }
+      #fail { color: red; }
+    </style>
+    <title>Image Tagger</title>
+  </head>
+  <body>
+    <div class="status" id="saved">Changes were saved</div>
+    <div class="status" id="fail">Error occured while saving tag</div>
+    <script src="/client/image.js"></script>
+  </body>
+</html>
