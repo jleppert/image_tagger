@@ -6,6 +6,8 @@ Clone the repo, make sure you have node, then just run npm install in the checke
 Put image files (browser compatible) under /images
 JSON data is under /tags
 
+Some sample data is provided and already checked in.
+
 Usage
 ----
 
