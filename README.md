@@ -6,6 +6,9 @@ Clone the repo, make sure you have node, then just run npm install in the checke
 Put image files (browser compatible) under /images
 JSON data is under /tags
 
+Usage
+----
+
 Index page UI lists all images with all of their tags and a button at the bottom to download the data.
 
 ![](http://i.imgur.com/6zcFsOe.jpg)
