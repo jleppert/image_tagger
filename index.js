@@ -25,6 +25,31 @@ app.get('/tags', function(req, res) {
   res.setHeader('content-type', 'application/json');
   fs.createReadStream(__dirname + '/tags/index.json').pipe(res);
 });
+
+app.get('/idl', function(req, res) {
+  fs.readFile(__dirname + '/tags/index.json', function(err, data) {
+    var tags = JSON.parse(data);
+    var converted = {};
+    Object.keys(tags).forEach(function(image) {
+      converted[image] = tags[image].map(function(tag) {
+        var xCoords = tag.map(function(coord) { return coord[0]; }), 
+            yCoords = tag.map(function(coord) { return coord[1]; });
+
+        return [Math.min.apply(Math, xCoords), Math.min.apply(Math, yCoords), Math.max.apply(Math, xCoords), Math.min.apply(Math, yCoords)];
+      });
+    });
+
+    var output = '';
+    Object.keys(converted).forEach(function(image) {
+      output += '"' + image + '": ';
+
+      output += converted[image].map(function(tag) {
+        return '(' + tag.join(', ') + ')'
+      }).join(', ') + ';' + "\n";
+    });
+    res.send(output).end();
+  });
+});
 app.post('/tags', function(req, res) {
   var tagData = JSON.parse(fs.readFileSync(__dirname + '/tags/index.json'));
 

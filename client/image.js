@@ -4,6 +4,8 @@ var qs = require('query-string').parse(location.search);
 var $img = $('<img></img>');
 $img.attr('src', '/images/' + decodeURIComponent(qs.image));
 
+document.title = "Image Tagger - " + qs.image;
+
 $img.on('load', function() {
   var width  = $img[0].naturalWidth,
       height = $img[0].naturalHeight;
@@ -69,6 +71,7 @@ $img.on('load', function() {
         ctx.save();
         tag.forEach(drawHandle);
       }
+      drawBoundingBox(tag);
 
       function drawHandle(coord, index) {
         var r = 6;
@@ -113,6 +116,25 @@ $img.on('load', function() {
           break;
         }
       }
+    }
+
+    function drawBoundingBox(tag) {
+      var xCoords = tag.map(function(coord) {
+        return coord[0];
+      }), yCoords = tag.map(function(coord) {
+        return coord[1];
+      });
+
+      var tl = [Math.min.apply(Math, xCoords), Math.min.apply(Math, yCoords)],
+          width = Math.max.apply(Math, xCoords) - tl[0],
+          height = Math.max.apply(Math, yCoords) - tl[1];
+      
+      ctx.save();
+      ctx.setLineDash([]);
+      ctx.strokeStyle = 'black';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(tl[0], tl[1], width, height);
+      ctx.restore();
     }
    
     function getPolygonCenter(pts) {
