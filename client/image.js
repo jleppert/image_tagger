@@ -230,6 +230,16 @@ $img.on('load', function() {
       }
     }
 
+    var inside = require('point-in-polygon');
+    $canvas.on('contextmenu', function(e) {
+      var index = tags.findIndex(function(tag) {
+        if(tag) return inside([e.offsetX, e.offsetY], tag);
+        return false;
+      });
+      delete tags[index];
+      e.preventDefault();
+    });
+
     $canvas.click(function(e) {
       var length = currentTag.length;
       
