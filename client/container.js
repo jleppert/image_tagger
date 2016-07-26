@@ -4,7 +4,7 @@ var size = JSON.parse(decodeURIComponent(qs.size));
 
 var $container = $('<iframe></iframe>');
 function setParentSize(width, height) {
-  var scale = [size.thumbnail.x / size.viewport.x, size.thumbnail.y / size.viewport.y];
+  var scale = [size.thumbnail.x / width, size.thumbnail.y / height];
   $container.attr('width', width);
   $container.attr('height', height);
 

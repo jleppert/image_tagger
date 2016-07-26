@@ -35,7 +35,7 @@ app.get('/idl', function(req, res) {
         var xCoords = tag.map(function(coord) { return coord[0]; }), 
             yCoords = tag.map(function(coord) { return coord[1]; });
 
-        return [Math.min.apply(Math, xCoords), Math.min.apply(Math, yCoords), Math.max.apply(Math, xCoords), Math.min.apply(Math, yCoords)];
+        return [Math.min.apply(Math, xCoords), Math.min.apply(Math, yCoords), Math.max.apply(Math, xCoords), Math.max.apply(Math, yCoords)];
       });
     });
 

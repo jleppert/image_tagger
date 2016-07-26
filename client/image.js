@@ -74,7 +74,7 @@ $img.on('load', function() {
       drawBoundingBox(tag);
 
       function drawHandle(coord, index) {
-        var r = 6;
+        var r = 2;
         ctx.beginPath();
         ctx.fillStyle = 'rgba(255, 255, 255, 1)';
         ctx.arc(coord[0], coord[1], r, 0, 2 * Math.PI);
@@ -93,7 +93,7 @@ $img.on('load', function() {
         switch(true) {
           case (index === 0):
             ctx.setLineDash(dashList);
-            ctx.lineWidth = 3;
+            ctx.lineWidth = 1;
             ctx.lineDashOffset = offset;
             ctx.strokeStyle = 'yellow';
             ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
@@ -161,7 +161,7 @@ $img.on('load', function() {
       });
     }
     
-    function addRemoveButton(tag, offset) {
+    /*function addRemoveButton(tag, offset) {
       var $btn = $('<button>Delete</button>');
       buttons.push($btn);
       $btn.css({
@@ -188,7 +188,8 @@ $img.on('load', function() {
         $btn.remove();
         saveTags();
       });
-    }
+    }*/
+    function addRemoveButton() {}
     
     var currentTag = [];
     function step() {
