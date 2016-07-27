@@ -23,9 +23,14 @@ app.get('/tags/:image', function(req, res) {
 });
 
 app.get('/tags', function(req, res) {
-  res.setHeader('content-type', 'text/html');
   var tags = JSON.parse(fs.readFileSync(__dirname + '/tags/index.json'));
-  res.send('<pre>' + JSON.stringify(tags, null, 4) + '</tags>').end();
+  if(req.query.pretty) {
+    res.setHeader('content-type', 'text/html');
+    res.send('<pre>' + JSON.stringify(tags, null, 4) + '</tags>').end();
+  } else {
+    res.setHeader('content-type', 'application/json');
+    res.send(JSON.stringify(tags)).end();
+  }
 });
 
 app.get('/idl', function(req, res) {
@@ -46,8 +51,8 @@ app.get('/idl', function(req, res) {
             yCoords = tag.map(function(coord) { return coord[1]; });
 
         return [
-          Math.min(Math.min.apply(Math, xCoords) - Math.ceil(padding / 2), 0),
-          Math.min(Math.min.apply(Math, yCoords) - Math.ceil(padding / 2), 0),
+          Math.max(Math.min.apply(Math, xCoords) - Math.ceil(padding / 2), 0),
+          Math.max(Math.min.apply(Math, yCoords) - Math.ceil(padding / 2), 0),
           Math.min(Math.max.apply(Math, xCoords) + Math.ceil(padding / 2), size.width), 
           Math.min(Math.max.apply(Math, yCoords) + Math.ceil(padding / 2), size.height)];
       });

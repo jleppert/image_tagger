@@ -28,7 +28,7 @@ $.getJSON('/tags', function(data) {
 });
 
 $('#view_json').on('click', function() {
-  window.open('/tags');
+  window.open('/tags?pretty=true');
 });
 
 $('#view_idl').on('click', function() {
