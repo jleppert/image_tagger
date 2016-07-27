@@ -50,11 +50,17 @@ app.get('/idl', function(req, res) {
         var xCoords = tag.map(function(coord) { return coord[0]; }), 
             yCoords = tag.map(function(coord) { return coord[1]; });
 
+        var minX = Math.min.apply(Math, xCoords) - padding,
+            minY = Math.min.apply(Math, yCoords) - padding;
+
+         if(minX < 0) minX = 0;
+         if(minY < 0) minY = 0;
+
         return [
-          Math.max(Math.min.apply(Math, xCoords) - Math.ceil(padding / 2), 0),
-          Math.max(Math.min.apply(Math, yCoords) - Math.ceil(padding / 2), 0),
-          Math.min(Math.max.apply(Math, xCoords) + Math.ceil(padding / 2), size.width), 
-          Math.min(Math.max.apply(Math, yCoords) + Math.ceil(padding / 2), size.height)];
+          minX,
+          minY,
+          Math.min(Math.max.apply(Math, xCoords) + padding, size.width), 
+          Math.min(Math.max.apply(Math, yCoords) + padding, size.height)];
       });
     });
 
