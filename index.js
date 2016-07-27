@@ -65,15 +65,32 @@ app.get('/idl', function(req, res) {
     res.send('<pre>' + output + '</pre>').end();
   });
 });
+var lockfile = require('lockfile');
 app.post('/tags', function(req, res) {
-  var tagData = JSON.parse(fs.readFileSync(__dirname + '/tags/index.json'));
-
-  var info = req.body;
-  tagData[info.image] = tagData[info.image] || [];
-  tagData[info.image] = info.tags;
+  lockfile.lock(__dirname + '/tags/index.json.lock', {
+    wait: 1000,
+    retries: 10,
+    retryWait: 100,
+    stale: 10000
+  }, function(err) {
+    if(err) {
+      res.status(500).end();
+    } else {
+      var tagData = JSON.parse(fs.readFileSync(__dirname + '/tags/index.json'));
+      var info = req.body;
+      tagData[info.image] = tagData[info.image] || [];
+      tagData[info.image] = info.tags;
   
-  fs.writeFileSync(__dirname + '/tags/index.json', JSON.stringify(tagData));
-  res.status(200).end();
+      fs.writeFileSync(__dirname + '/tags/index.json', JSON.stringify(tagData));
+      lockfile.unlock(__dirname + '/tags/index.json.lock', function(err) {
+        if(err) {
+          res.status(500).end();
+        } else {
+          res.status(200).end();
+        }
+      });
+    }
+  });
 });
 app.listen(package.port, function() {
   console.log('Started listening on port', package.port);
