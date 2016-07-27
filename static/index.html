@@ -9,18 +9,24 @@
       button { font-weight: bold; }
       .page { margin-right: 5px; color: black; }
       .current { font-weight: bold; color: blue; }
+      .loading { display: none; z-index: 99; border: 5px dashed yellow; outline: 2px dashed pink; box-shadow: 0px 0px 20px 10px blue; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; margin: auto auto auto auto; width: 33%; height: 150px; background-color: rgba(128, 128, 255, 0.8); }
+      .loading span { position: relative; top: 45%; bottom: 0px; left: 0px; right: 0px; margin: auto auto auto auto; display: table; height: auto; font-weight: bold; }
+      #paginator { 
     </style>
   </head>
   <body>
+    <div class="loading">
+      <span>Get ready to tag...</span>
+    </div>
     <div id="data">
       <div style="float: left;">
+        <input id="padding" type="text" placeholder="IDL padding (integer pixels)" size="25" />
         <button id="view_json">View Data - JSON</button>
         <button id="view_idl">View Data - IDL</button>
       </div>
-      <div id="paginator" style="margin: 0 auto; width: 200px; overflow-y: scroll;">
-      </div>
-
+      <div id="paginator"></div>
     </div>
+    <div id="container"></div>
     <script src="/client/index.js"></script>
   </body>
 </html>

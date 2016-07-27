@@ -27,10 +27,14 @@ $.getJSON('/tags', function(data) {
   tags = data;
 });
 
-$('#view').on('click', function() {
-  console.log('open!!');
+$('#view_json').on('click', function() {
   window.open('/tags');
 });
+
+$('#view_idl').on('click', function() {
+  window.open('/idl?padding=' + ($('#padding').val() || 0) );
+});
+
 
 window.getTagsForImage = function(image) {
   return tags[image];
@@ -210,7 +214,7 @@ $.getJSON('/images', function(data) {
     return paramsForImage(next);
   }
 
-  var $containerEl = $('<div></div>');
+  var $containerEl = $('#container');
   $containerEl.css({
     width: Math.floor($(window).width() / size.thumbnail.x) * size.thumbnail.x + 'px',
     margin: '0 auto',
