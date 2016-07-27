@@ -46,8 +46,8 @@ app.get('/idl', function(req, res) {
             yCoords = tag.map(function(coord) { return coord[1]; });
 
         return [
-          Math.min(Math.min.apply(Math, xCoords) + Math.ceil(padding / 2), size.width),
-          Math.min(Math.min.apply(Math, yCoords) + Math.ceil(padding / 2), size.height),
+          Math.min(Math.min.apply(Math, xCoords) - Math.ceil(padding / 2), 0),
+          Math.min(Math.min.apply(Math, yCoords) - Math.ceil(padding / 2), 0),
           Math.min(Math.max.apply(Math, xCoords) + Math.ceil(padding / 2), size.width), 
           Math.min(Math.max.apply(Math, yCoords) + Math.ceil(padding / 2), size.height)];
       });
